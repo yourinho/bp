@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block bodytag %}
+  <body {% if onloadMessage %} onload="alert('{{ onloadMessage }}');" {% endif %}>
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <!--<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Home</a>
+        </div>-->
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-left" action="/login" method="POST">
+                {{ loginForm.csrf_token }}
+                <div class="form-group">
+                    {{ loginForm.loginemail(class="form-control", placeholder="Email address") }}
+                </div>
+                <div class="form-group">
+                    {{ loginForm.loginpassword(class="form-control", placeholder="Password") }}
+                </div class="form-group">
+                    {{ loginForm.submit(value="Sign in", class="btn btn_success") }}
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Ваше давление</h1>
+        <p>Этот простой сервис позволит вам записывать показания своего артериального давления для последующего анализа статистики.</p>
+      </div>
+    </div>
+
+     <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Register now</h2>
+             <form class="form-horizontal" action="/register" method="POST">
+              {{ registrationForm.csrf_token }}
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        {% if registrationForm.email.errors %}
+                          <ul class="errors">
+                            {% for error in registrationForm.email.errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                        {{ registrationForm.email(class="form-control", placeholder="Email address") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        {% if registrationForm.password.errors %}
+                        <ul class="errors">
+                          {% for error in registrationForm.password.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {{ registrationForm.password(class="form-control", placeholder="Password") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        {% if registrationForm.password2.errors %}
+                          <ul class="errors">
+                            {% for error in registrationForm.password2.errors%}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                        {{ registrationForm.password2(class="form-control", placeholder="Confirm password") }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        {{ registrationForm.submit(class="btn btn-primary btn-block") }}
+                    </div>
+                </div>
+            </form> <!-- /form -->
+        </div>
+      </div>
+    </div>
+{% endblock %}
