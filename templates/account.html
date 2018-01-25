@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="jumbotron">
+	<!--<div class="jumbotron">
 		<div class="container">
 			<h1>Account</h1>
 			<p>Manage tables and get URLs</p>
 		</div>
-	</div>
+	</div>-->
 
 	<div class="container">
 		<div class="row">
@@ -16,12 +16,21 @@
 					<tr>
 						<th>No.</th>
 						<th>Дата и время</th>
-						<th>Верхнее</th>
-                        <th>Нижнее</th>
-                        <th>Пульс</th>
+						<th>Верхнее/SYS.(mmHg)</th>
+                        <th>Нижнее/DIA.(mmHg)</th>
+                        <th>Пульс/PUL.(/min)</th>
 					</tr>
 				</table>
 				<h2>Добавить показание</h2>
+				<form class="form-inline" action="/account/add_measurement" method="POST">
+					<div class="form-group">
+						{{ createMeasurementForm.csrf_token }}
+						{{ createMeasurementForm.sys_mmhg(class="form-control", placeholder="Верхнее значение") }}
+                        {{ createMeasurementForm.dia_mmhg(class="form-control", placeholder="Нижнее значение") }}
+                        {{ createMeasurementForm.pul(class="form-control", placeholder="Пульс") }}
+						{{ createMeasurementForm.submit(value="Create", class="btn btn-primary") }}
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

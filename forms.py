@@ -4,6 +4,7 @@ from wtforms import SubmitField
 from wtforms.fields.html5 import EmailField
 from wtforms import validators
 from wtforms import TextField
+from wtforms import IntegerField
 
 # This class inherits from Form, a generic form object that we  nd inside
 # the flask_wtf extension.
@@ -31,7 +32,8 @@ class LoginForm(Form):
     submit = SubmitField('submit', [validators.DataRequired()])
 
 
-class CreateTableForm(Form):
-    tablenumber = TextField('tablenumber', validators=[
-                            validators.DataRequired()])
+class CreateMeasurementForm(Form):
+    sys_mmhg = IntegerField('sys_mmhg', validators=[validators.DataRequired()])
+    dia_mmhg = IntegerField('dia_mmhg', validators=[validators.DataRequired()])
+    pul = IntegerField('pul', validators=[validators.DataRequired()])
     submit = SubmitField('submit', validators=[validators.DataRequired()])

@@ -12,11 +12,11 @@ from flask.ext.login import login_required
 # Import forms.
 from forms import LoginForm
 from forms import RegistrationForm
+from forms import CreateMeasurementForm
 # Import our classes.
 from user import User
 # Hack for local development without database.
 import config
-
 if config.test:
     from mockdbhelper import MockDBHelper as DBHelper
 from passwordhelper import PasswordHelper
@@ -75,7 +75,7 @@ def load_user(user_id):
 @app.route('/account')
 @login_required
 def account():
-    return render_template("account.html")
+    return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
 
 
 @app.route('/register', methods=["POST"])
@@ -97,6 +97,14 @@ def register():
                                registrationForm=form,
                                onloadMessage="Registration successful. Please log in.")
     return render_template("home.html", loginForm=LoginForm(), registrationForm=form)
+
+
+@app.route('/account/add_measurement', methods=["POST"])
+def account_add_measurement():
+    form = CreateMeasurementForm(request.form)
+    if form.validate():
+        return redirect(url_for("account"))
+    return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
 
 
 if __name__ == '__main__':
