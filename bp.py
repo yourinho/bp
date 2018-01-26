@@ -75,7 +75,8 @@ def load_user(user_id):
 @app.route('/account')
 @login_required
 def account():
-    return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
+    measurements = DB.get_measurements()
+    return render_template("account.html", createMeasurementForm=CreateMeasurementForm(), measurements=measurements)
 
 
 @app.route('/register', methods=["POST"])
@@ -103,6 +104,7 @@ def register():
 def account_add_measurement():
     form = CreateMeasurementForm(request.form)
     if form.validate():
+        DB.add_measurement(form.sys_mmhg, form.dia_mmhg, form.pul)
         return redirect(url_for("account"))
     return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
 

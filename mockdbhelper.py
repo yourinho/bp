@@ -22,6 +22,11 @@ MOCK_REQUESTS = [{"_id": "1",
                   "table_id": "1",
                   "time": datetime.datetime.now()}]
 
+MOCK_MEASUREMENTS = [{"_id": "1",
+                      "date_time": datetime.datetime.now(),
+                      "sys_mmhg": "120",
+                      "dia_mmhg": "80",
+                      "pul": "70"}]
 
 class MockDBHelper:
 
@@ -79,3 +84,28 @@ class MockDBHelper:
     def print_users(self):
         for x in MOCK_USERS:
             print(x.get('email'))
+
+    # Measurements:
+    # To Do: add owner to measurement
+    def add_measurement(self, sys, dia, pul):
+        MOCK_MEASUREMENTS.append({"_id": "0",
+                                  "date_time": datetime.datetime.now(),
+                                  "sys_mmhg": sys,
+                                  "dia_mmhg": dia,
+                                  "pul": pul})
+        return True
+
+    def delete_measurement(self, measurement_id):
+        for i, mea in enumerate(MOCK_MEASUREMENTS):
+            if mea.get("_id") == measurement_id:
+                del MOCK_MEASUREMENTS[i]
+                break
+
+    def get_measurements(self):
+        return MOCK_MEASUREMENTS
+
+    def get_measurement(self, measurement_id):
+        for mea in MOCK_MEASUREMENTS:
+            if mea.get("_id") == measurement_id:
+                return mea
+

@@ -20,6 +20,15 @@
                         <th>Нижнее/DIA.(mmHg)</th>
                         <th>Пульс/PUL.(/min)</th>
 					</tr>
+                    {% for mea in measurements %}
+                        <tr>
+                            <td>{{ mea._id }}</td>
+                            <td>{{ mea.date_time }}</td>
+                            <td>{{ mea.sys_mmhg }}</td>
+                            <td>{{ mea.dia_mmhg }}</td>
+                            <td>{{ mea.pul }}</td>
+                        </tr>
+                    {% endfor %}
 				</table>
 				<h2>Добавить показание</h2>
 				<form class="form-inline" action="/account/add_measurement" method="POST">
