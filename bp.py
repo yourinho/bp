@@ -108,7 +108,7 @@ def register():
 def account_add_measurement():
     form = CreateMeasurementForm(request.form)
     if form.validate():
-        DB.add_measurement(datetime.datetime.now(), form.sys_mmhg, form.dia_mmhg, form.pul)
+        DB.add_measurement(datetime.datetime.now(), form.sys_mmhg.data, form.dia_mmhg.data, form.pul.data)
         return redirect(url_for("account"))
     return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
 
