@@ -3,6 +3,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask import redirect
+import datetime
 # Passwords module.
 from passwordhelper import PasswordHelper
 # Import for login management
@@ -107,7 +108,7 @@ def register():
 def account_add_measurement():
     form = CreateMeasurementForm(request.form)
     if form.validate():
-        DB.add_measurement(form.sys_mmhg, form.dia_mmhg, form.pul)
+        DB.add_measurement(datetime.datetime.now(), form.sys_mmhg, form.dia_mmhg, form.pul)
         return redirect(url_for("account"))
     return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
 
