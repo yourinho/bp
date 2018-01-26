@@ -63,7 +63,7 @@ class DBHelper:
         return new_id
 
     def get_measurements(self):
-        return list(self.db.find())
+        return list(self.db.measurements.find())
 
     def get_measurement(self, measurement_id):
         return self.db.measurements.find_one({"_id": ObjectId(measurement_id)})
