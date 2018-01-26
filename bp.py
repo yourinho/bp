@@ -113,5 +113,13 @@ def account_add_measurement():
     return render_template("account.html", createMeasurementForm=CreateMeasurementForm())
 
 
+@app.route('/account/delete_measurement')
+@login_required
+def account_delete_measurement():
+    measurement_id = request.args.get("measurement_id")
+    DB.delete_measurement(measurement_id)
+    return redirect(url_for('account'))
+
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

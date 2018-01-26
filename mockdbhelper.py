@@ -28,6 +28,7 @@ MOCK_MEASUREMENTS = [{"_id": "1",
                       "dia_mmhg": "80",
                       "pul": "70"}]
 
+
 class MockDBHelper:
 
     def get_user(self, email):
@@ -39,57 +40,11 @@ class MockDBHelper:
     def add_user(self, email, salt, hashed):
         MOCK_USERS.append({"email": email, "salt": salt, "hashed": hashed})
 
-    def add_table(self, number, owner):
-        MOCK_TABLES.append({"_id": number, "number": number, "owner": owner})
-        return number
-
-    def update_table(self, _id, url):
-        for table in MOCK_TABLES:
-            if table.get("_id") == _id:
-                table["url"] = url
-                break
-
-    def delete_table(self, table_id):
-        for i, table in enumerate(MOCK_TABLES):
-            if table.get("_id") == table_id:
-                del MOCK_TABLES[i]
-                break
-
-    def get_tables(self, owner_id):
-        return MOCK_TABLES
-
-    def get_table(self, table_id):
-        for table in MOCK_TABLES:
-            if table.get("_id") == table_id:
-                return table
-
-    def add_request(self, table_id, time):
-        table = self.get_table(table_id)
-        MOCK_REQUESTS.append({"_id": table_id,
-                              "owner": table.get("owner"),
-                              "table_number": table.get("number"),
-                              "table_id": table_id,
-                              "time": time})
-        return True
-
-    def delete_request(self, request_id):
-        for i, req in enumerate(MOCK_REQUESTS):
-            if req.get("_id") == request_id:
-                del MOCK_REQUESTS[i]
-                break
-
-    def get_requests(self, owner_id):
-        return MOCK_REQUESTS
-
-    def print_users(self):
-        for x in MOCK_USERS:
-            print(x.get('email'))
-
     # Measurements:
     # To Do: add owner to measurement
-    def add_measurement(self, sys, dia, pul):
+    def add_measurement(self, date_time, sys, dia, pul):
         MOCK_MEASUREMENTS.append({"_id": "0",
-                                  "date_time": datetime.datetime.now(),
+                                  "date_time": date_time,
                                   "sys_mmhg": sys,
                                   "dia_mmhg": dia,
                                   "pul": pul})
@@ -108,4 +63,3 @@ class MockDBHelper:
         for mea in MOCK_MEASUREMENTS:
             if mea.get("_id") == measurement_id:
                 return mea
-
