@@ -7,16 +7,8 @@
 {% block navbar %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <!--<div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Home</a>
-        </div>-->
-        <div id="navbar" class="navbar-collapse collapse">
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
+        <div id="navbar" class="navbar-inverse navbar-fixed-top">
             <form class="navbar-form navbar-left" action="/login" method="POST">
                 {{ loginForm.csrf_token }}
                 <div class="form-group">
@@ -26,7 +18,7 @@
                     {{ loginForm.loginpassword(class="form-control", placeholder="Password") }}
                 </div class="form-group">
                     {{ loginForm.submit(value="Sign in", class="btn btn_success") }}
-          </form>
+            </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
