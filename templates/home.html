@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default">
       <div class="container">
         <!--<div id="navbar" class="navbar-collapse collapse">-->
-        <div id="navbar" class="navbar-inverse navbar-fixed-top">
+        <div id="navbar" class="navbar-default">
             <form class="navbar-form navbar-left" action="/login" method="POST">
                 {{ loginForm.csrf_token }}
                 <div class="form-group">
