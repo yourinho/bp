@@ -34,7 +34,7 @@ class LoginForm(Form):
 
 
 class CreateMeasurementForm(Form):
-    sys_mmhg = StringField('sys_mmhg', validators=[validators.DataRequired()])
-    dia_mmhg = StringField('dia_mmhg', validators=[validators.DataRequired()])
-    pul = StringField('pul', validators=[validators.DataRequired()])
+    sys_mmhg = TextField('sys_mmhg', validators=[validators.DataRequired()])
+    dia_mmhg = TextField('dia_mmhg', validators=[validators.DataRequired()])
+    pul = TextField('pul', validators=[validators.DataRequired()])
     submit = SubmitField('submit', validators=[validators.DataRequired()])
