@@ -3,6 +3,8 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask import redirect
+# Passwords module.
+from passwordhelper import PasswordHelper
 # Import for login management
 from flask.ext.login import login_user
 from flask.ext.login import logout_user
@@ -19,7 +21,8 @@ from user import User
 import config
 if config.test:
     from mockdbhelper import MockDBHelper as DBHelper
-from passwordhelper import PasswordHelper
+else:
+    from dbhelper import DBHelper
 
 
 DB = DBHelper()
