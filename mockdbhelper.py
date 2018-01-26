@@ -42,8 +42,9 @@ class MockDBHelper:
 
     # Measurements:
     # To Do: add owner to measurement
-    def add_measurement(self, date_time, sys, dia, pul):
+    def add_measurement(self, owner_id, date_time, sys, dia, pul):
         MOCK_MEASUREMENTS.append({"_id": "0",
+                                  "owner_id": owner_id,
                                   "date_time": date_time,
                                   "sys_mmhg": sys,
                                   "dia_mmhg": dia,
@@ -56,7 +57,7 @@ class MockDBHelper:
                 del MOCK_MEASUREMENTS[i]
                 break
 
-    def get_measurements(self):
+    def get_measurements(self, owner_id):
         return MOCK_MEASUREMENTS
 
     def get_measurement(self, measurement_id):

@@ -55,15 +55,16 @@ class DBHelper:
         self.db.requests.remove({"_id": ObjectId(request_id)})
 
     # Measurements.
-    def add_measurement(self, date_time, sys_mmhg, dia_mmhg, pul):
-        new_id = self.db.measurements.insert({"date_time": date_time,
+    def add_measurement(self, owner_id, date_time, sys_mmhg, dia_mmhg, pul):
+        new_id = self.db.measurements.insert({"owner_id": owner_id,
+                                              "date_time": date_time,
                                               "sys_mmhg": sys_mmhg,
                                               "dia_mmhg": dia_mmhg,
                                               "pul": pul})
         return new_id
 
-    def get_measurements(self):
-        return list(self.db.measurements.find())
+    def get_measurements(self, owner_id):
+        return list(self.db.measurements.find({"owner_id": owner_id}))
 
     def get_measurement(self, measurement_id):
         return self.db.measurements.find_one({"_id": ObjectId(measurement_id)})
